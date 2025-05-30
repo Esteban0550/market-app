@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "compras")
-public class compra {
+public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_compra serial")
+    @Column (name = "id_compra")
     private int idProducto;
 
 
