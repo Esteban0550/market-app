@@ -1,31 +1,35 @@
 package com.tecdesoftware.market.persistence.entity;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table (name  = "productos")
-
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_producto")
+    @Column(name = "id_producto")
     private int idProducto;
 
-    private Integer nombre;
+    private String nombre;
 
     @Column(name = "id_categoria")
-    private int idCategoria;
+    private Integer idCategoria;
 
-    @Column (name = "codigo_barras")
+    @Column(name = "codigo_barras")
     private String codigoBarras;
 
-    @Column (name = "precio_venta")
-    private double precioVenta;
+    @Column(name = "precio_venta")
+    private Double precioVenta;
 
-    @Column (name = "camtidad_stock")
-    private int camtidadStock;
+    @Column(name = "cantidad_stock")
+    private Integer cantidadStock;
 
-   private Boolean estado;
+    private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categoria categoria;
 
     public int getIdProducto() {
         return idProducto;
@@ -35,19 +39,19 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public Integer getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(Integer nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public int getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -59,20 +63,20 @@ public class Producto {
         this.codigoBarras = codigoBarras;
     }
 
-    public double getPrecioVenta() {
+    public Double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(double precioVenta) {
+    public void setPrecioVenta(Double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
-    public int getCamtidadStock() {
-        return camtidadStock;
+    public Integer getCantidadStock() {
+        return cantidadStock;
     }
 
-    public void setCamtidadStock(int camtidadStock) {
-        this.camtidadStock = camtidadStock;
+    public void setCantidadStock(Integer cantidadStock) {
+        this.cantidadStock = cantidadStock;
     }
 
     public Boolean getEstado() {
