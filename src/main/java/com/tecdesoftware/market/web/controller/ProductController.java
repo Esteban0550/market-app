@@ -4,9 +4,7 @@ import com.tecdesoftware.market.domain.Product;
 import com.tecdesoftware.market.domain.service.ProductService;
 import com.tecdesoftware.market.persistence.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,30 +13,31 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    //Inyectar el servicio
+
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductoRepository productoRepository;
 
-    @GetMapping("/all")
+    // 1. Obtener todos los productos
+    @GetMapping
     public List<Product> getAll() {
         return productService.getAll();
     }
 
-    public Optional<Product> getProduct(int productId) {
+    // 2. Obtener un producto por ID
+    @GetMapping("/{id}")
+    public Optional<Product> getProduct(@PathVariable("id") int productId) {
         return productService.getProduct(productId);
     }
 
-    public Optional<List<Product>> getByCategory(int categoryId) {
-        return productService.getByCategory(categoryId);
-    }
-
-    public Product save(Product product) {
+    // 3. Guardar un producto
+    @PostMapping
+    public Product save(@RequestBody Product product) {
         return productService.save(product);
     }
 
-    public boolean delete(int productId) {
+    // 4. Eliminar un producto por ID
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") int productId) {
         return productService.delete(productId);
     }
 }
